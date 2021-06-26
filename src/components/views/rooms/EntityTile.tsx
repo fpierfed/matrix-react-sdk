@@ -189,7 +189,7 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
         if ((powerStatus in PowerLabel) && !(powerStatus in genericLevels)) {
             const powerText = PowerLabel[powerStatus];
             const powerInteger = PowerInteger[powerStatus]
-            powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerIngerer}`}>{powerText}</div>;
+            powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerInteger}`}>{powerText}</div>;
         }
 
         let e2eIcon;
