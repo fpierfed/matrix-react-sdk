@@ -45,6 +45,16 @@ const PowerLabel: Record<PowerStatus, string> = {
     [PowerStatus.Sprinter]: "Sprinter",
 }
 
+const PowerInteger: Record<PowerStatus, number> = {
+    [PowerStatus.Admin]: 100,
+    [PowerStatus.Organizer]: 75,
+    [PowerStatus.Moderator]: 50,
+    [PowerStatus.Sponsor]: 40,
+    [PowerStatus.Speaker]: 12,
+    [PowerStatus.Attendee]: 9,
+    [PowerStatus.Sprinter]: 3,
+}
+
 const PRESENCE_CLASS = {
     "offline": "mx_EntityTile_offline",
     "online": "mx_EntityTile_online",
@@ -178,7 +188,8 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
         const genericLevels = ["attendee", "sprinter"]
         if ((powerStatus in PowerLabel) && !(powerStatus in genericLevels)) {
             const powerText = PowerLabel[powerStatus];
-            powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerStatus}`}>{powerText}</div>;
+            const powerInteger = PowerInteger[powerStatus]
+            powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerIngerer}`}>{powerText}</div>;
         }
 
         let e2eIcon;
