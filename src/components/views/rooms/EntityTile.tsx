@@ -27,12 +27,12 @@ import PresenceLabel from "./PresenceLabel";
 
 export enum PowerStatus {
     Admin = "admin",
-    Moderator = "moderator",
     Organizer = "organizer",
+    Moderator = "moderator",
     Sponsor = "sponsor",
     Speaker = "speaker",
-    Attendee = "attendee"
-    Sprinter = "sprinter"
+    Attendee = "attendee",
+    Sprinter = "sprinter",
 }
 
 const PowerLabel: Record<PowerStatus, string> = {
@@ -174,8 +174,9 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
         }
 
         let powerLabel;
-        const powerStatus = this.props.member.powerStatus;
-        if (powerStatus > 9) {
+        const powerStatus = this.props.powerStatus;
+        const genericLevels = ["attendee", "sprinter"]
+        if ((powerStatus in PowerLabel) && !(powerStatus in genericLevels)) {
             const powerText = PowerLabel[powerStatus];
             powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerStatus}`}>{powerText}</div>;
         }
