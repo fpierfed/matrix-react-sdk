@@ -1036,9 +1036,10 @@ const PowerLevelSection: React.FC<{
         const powerLevelUsersDefault = powerLevels.users_default || 0;
         const powerLevel = user.powerLevel;
         const role = textualPowerLevel(powerLevel, powerLevelUsersDefault);
+        const powerLevelClass = `mx_powerLevel_${powerLevel || 0}`
         return (
             <div className="mx_UserInfo_profileField">
-                <div className="mx_UserInfo_roleDescription">{role}</div>
+                <div className={`mx_UserInfo_roleDescription mx_powerLevel ${powerLevelClass}`}>{role}</div>
             </div>
         );
     }

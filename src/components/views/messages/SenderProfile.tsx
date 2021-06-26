@@ -21,6 +21,7 @@ import { getUserNameColorClass } from '../../../utils/FormattingUtils';
 import MatrixClientContext from "../../../contexts/MatrixClientContext";
 import { replaceableComponent } from "../../../utils/replaceableComponent";
 import { MatrixEvent } from "matrix-js-sdk/src/models/event";
+import { textualPowerLevel } from "../../../Roles";
 
 interface IProps {
     mxEvent: MatrixEvent;
@@ -139,10 +140,20 @@ export default class SenderProfile extends React.Component<IProps, IState> {
             />;
         }
 
+        const powerLevel = parseInt(mxEvent.powerLevel || 0, 10);
+        const role = textualPowerLevel(powerLevel, 0);
+        const powerLevelClass = `mx_powerLevel_${powerLevel}`;
+        let powerEl;
+        if (powerLevel > 9) {
+            powerEl = <span className={`sp_powerLevel ${powerLevelClass}`}>{" "}{role}</span>;
+        }
+
         return (
             <div className="mx_SenderProfile mx_SenderProfile_hover" dir="auto" onClick={this.props.onClick}>
-                <span className={`mx_SenderProfile_displayName ${colorClass}`}>
-                    { displayName }
+                <span>
+                    <span className={`mx_SenderProfile_displayName ${colorClass}`}>
+                        { displayName }
+                    </span>
                 </span>
                 { mxidElement }
                 { flair }

@@ -28,11 +28,21 @@ import PresenceLabel from "./PresenceLabel";
 export enum PowerStatus {
     Admin = "admin",
     Moderator = "moderator",
+    Organizer = "organizer",
+    Sponsor = "sponsor",
+    Speaker = "speaker",
+    Attendee = "attendee"
+    Sprinter = "sprinter"
 }
 
 const PowerLabel: Record<PowerStatus, string> = {
     [PowerStatus.Admin]: _td("Admin"),
+    [PowerStatus.Organizer]: "Organizer",
     [PowerStatus.Moderator]: _td("Mod"),
+    [PowerStatus.Sponsor]: "Sponsor",
+    [PowerStatus.Speaker]: "Speaker",
+    [PowerStatus.Attendee]: "Attendee",
+    [PowerStatus.Sprinter]: "Sprinter",
 }
 
 const PRESENCE_CLASS = {
@@ -164,10 +174,10 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
         }
 
         let powerLabel;
-        const powerStatus = this.props.powerStatus;
-        if (powerStatus) {
+        const powerStatus = this.props.member.powerStatus;
+        if (powerStatus > 9) {
             const powerText = PowerLabel[powerStatus];
-            powerLabel = <div className="mx_EntityTile_power">{powerText}</div>;
+            powerLabel = <div className={`mx_EntityTile_power sp_powerLevel mx_powerLevel_${powerStatus}`}>{powerText}</div>;
         }
 
         let e2eIcon;
