@@ -140,10 +140,22 @@ export default class SenderProfile extends React.Component<IProps, IState> {
             />;
         }
 
-        const powerLevel = mxEvent.sender?.powerLevel || 0;
+        let powerLevel = 0;
+        if (mxEvent.sender) {
+            let member;
+            // set member to receiver (target) if it is a 3PID invite
+            // so that the correct avatar is shown as the text is
+            // `$target accepted the invitation for $email`
+            if (mxEvent.getContent().third_party_invite) {
+                member = mxEvent.target;
+            } else {
+                member = mxEvent.sender;
+            }
+            powerLevel = member.powerLevel;
+        }
         const role = textualPowerLevel(powerLevel, 0);
         const powerLevelClass = `mx_powerLevel_${powerLevel}`;
-        let powerEl;
+        let powerEl = <span>No power level known</span>;
         if (powerLevel > 9) {
             powerEl = <span className={`sp_powerLevel ${powerLevelClass}`}>{" "}{role}</span>;
         }
