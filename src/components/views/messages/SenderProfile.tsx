@@ -140,7 +140,7 @@ export default class SenderProfile extends React.Component<IProps, IState> {
             />;
         }
 
-        const powerLevel = parseInt(mxEvent.powerLevel || 0, 10);
+        const powerLevel = mxEvent.sender?.powerLevel || 0;
         const role = textualPowerLevel(powerLevel, 0);
         const powerLevelClass = `mx_powerLevel_${powerLevel}`;
         let powerEl;
