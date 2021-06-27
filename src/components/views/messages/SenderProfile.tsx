@@ -141,22 +141,10 @@ export default class SenderProfile extends React.Component<IProps, IState> {
             />;
         }
 
-        const member = new RoomMember(mxEvent.getRoomId(), mxEvent.getSender());
-        const powerLevel = member.powerLevel;
-        const role = textualPowerLevel(powerLevel, 0);
-        const powerLevelClass = `mx_powerLevel_${powerLevel}`;
-        let powerEl = <span> No power level known</span>;
-        if (powerLevel > 9) {
-            powerEl = <span className={`sp_powerLevel ${powerLevelClass}`}>{" "}{role}</span>;
-        }
-
         return (
             <div className="mx_SenderProfile mx_SenderProfile_hover" dir="auto" onClick={this.props.onClick}>
-                <span>
-                    <span className={`mx_SenderProfile_displayName ${colorClass}`}>
-                        { displayName }
-                    </span>
-                    { powerEl }
+                <span className={`mx_SenderProfile_displayName ${colorClass}`}>
+                    { displayName }
                 </span>
                 { mxidElement }
                 { flair }
