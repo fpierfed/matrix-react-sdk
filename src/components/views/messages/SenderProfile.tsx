@@ -154,6 +154,7 @@ export default class SenderProfile extends React.Component<IProps, IState> {
                     <span className={`mx_SenderProfile_displayName ${colorClass}`}>
                         { displayName }
                     </span>
+                    { powerEl }
                 </span>
                 { mxidElement }
                 { flair }
