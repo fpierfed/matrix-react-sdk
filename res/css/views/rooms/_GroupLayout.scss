@@ -55,6 +55,7 @@ $left-gutter: 64px;
         &.mx_EventTile_info {
             // same as the padding for non-compact .mx_EventTile.mx_EventTile_info
             padding-top: 0px;
+            display: none;
             font-size: $font-13px;
             .mx_EventTile_line, .mx_EventTile_reply {
                 line-height: $font-20px;
