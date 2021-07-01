@@ -43,7 +43,7 @@ const PowerLabel: Record<PowerStatus, string> = {
     [PowerStatus.Speaker]: "Speaker",
     [PowerStatus.Attendee]: "Attendee",
     [PowerStatus.Sprinter]: "Sprinter",
-}
+};
 
 const PowerInteger: Record<PowerStatus, number> = {
     [PowerStatus.Admin]: 100,
@@ -53,7 +53,7 @@ const PowerInteger: Record<PowerStatus, number> = {
     [PowerStatus.Speaker]: 12,
     [PowerStatus.Attendee]: 9,
     [PowerStatus.Sprinter]: 3,
-}
+};
 
 const PRESENCE_CLASS = {
     "offline": "mx_EntityTile_offline",
@@ -136,7 +136,7 @@ export default class EntityTile extends React.PureComponent<IProps, IState> {
         mainClassNames[presenceClass] = true;
 
         let nameEl;
-        const {name} = this.props;
+        const { name } = this.props;
 
         if (!this.props.suppressOnHover) {
             const activeAgo = this.props.presenceLastActiveAgo ?

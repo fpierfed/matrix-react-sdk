@@ -15,9 +15,10 @@ limitations under the License.
 */
 
 import React from "react";
-import {IRecordingUpdate, VoiceRecording} from "../../../voice/VoiceRecording";
-import {replaceableComponent} from "../../../utils/replaceableComponent";
+import { IRecordingUpdate, VoiceRecording } from "../../../voice/VoiceRecording";
+import { replaceableComponent } from "../../../utils/replaceableComponent";
 import Clock from "./Clock";
+import { MarkedExecution } from "../../../utils/MarkedExecution";
 
 interface IProps {
     recorder: VoiceRecording;
@@ -30,18 +31,33 @@ interface IState {
 /**
  * A clock for a live recording.
  */
-@replaceableComponent("views.voice_messages.LiveRecordingClock")
+@replaceableComponent("views.audio_messages.LiveRecordingClock")
 export default class LiveRecordingClock extends React.PureComponent<IProps, IState> {
-    public constructor(props) {
-        super(props);
+    private seconds = 0;
+    private scheduledUpdate = new MarkedExecution(
+        () => this.updateClock(),
+        () => requestAnimationFrame(() => this.scheduledUpdate.trigger()),
+    );
 
-        this.state = {seconds: 0};
-        this.props.recorder.liveData.onUpdate(this.onRecordingUpdate);
+    constructor(props) {
+        super(props);
+        this.state = {
+            seconds: 0,
+        };
     }
 
-    private onRecordingUpdate = (update: IRecordingUpdate) => {
-        this.setState({seconds: update.timeSeconds});
-    };
+    componentDidMount() {
+        this.props.recorder.liveData.onUpdate((update: IRecordingUpdate) => {
+            this.seconds = update.timeSeconds;
+            this.scheduledUpdate.mark();
+        });
+    }
+
+    private updateClock() {
+        this.setState({
+            seconds: this.seconds,
+        });
+    }
 
     public render() {
         return <Clock seconds={this.state.seconds} />;
