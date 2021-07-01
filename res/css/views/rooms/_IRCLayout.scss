@@ -140,8 +140,6 @@ $irc-line-height: $font-18px;
     }
 
     .mx_EventTile.mx_EventTile_info {
-        display: none;
-
         .mx_EventTile_avatar {
             left: calc(var(--name-width) + 10px + $icon-width);
             top: 0;
