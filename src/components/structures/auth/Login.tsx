@@ -212,7 +212,24 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
             // Some error strings only apply for logging in
             const usingEmail = username.indexOf("@") > 0;
             if (error.errcode == 'no_tickets_found') {
-                errorText = "Login failed. Please purchase or assign a ticket to this email address first.";
+                errorText = (
+                    <div>
+                        <div>
+                            Login failed. Possible errors:
+                        </div>
+                        <ul>
+                            <li>
+                            Invalid password
+                            </li>
+                            <li>
+                            Ticket has not been assigned to this email address
+                            </li>
+                            <li>
+                            Ticket has not been purchased
+                            </li>
+                        </ul>
+                    </div>
+                )
             } else if (error.httpStatus === 400 && usingEmail) {
                 errorText = _t('This homeserver does not support login using email address.');
             } else if (error.errcode === 'M_RESOURCE_LIMIT_EXCEEDED') {

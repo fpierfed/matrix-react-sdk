@@ -40,6 +40,8 @@ $hover-select-border: 4px;
 .mx_EventTile.mx_EventTile_info .mx_EventTile_avatar {
     top: $font-6px;
     left: $left-gutter;
+    /* Hide line noise */
+    display: none;
 }
 
 .mx_EventTile_continuation {
@@ -113,6 +115,8 @@ $hover-select-border: 4px;
     .mx_EventTile_line {
         /* ideally should be 100px, but 95px gives us a max thumbnail size of 800x600, which is nice */
         margin-right: 110px;
+        /* Hide line noise */
+        display: none;
     }
 }
 
