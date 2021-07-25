@@ -234,6 +234,9 @@ export default class MemberTile extends React.Component<IProps, IState> {
         const powerStatusMap = new Map([
             [100, PowerStatus.Admin],
             [50, PowerStatus.Moderator],
+            [75, PowerStatus.Organizer],
+            [40, PowerStatus.Sponsor],
+            [12, PowerStatus.Speaker],
         ]);
 
         // Find the nearest power level with a badge
